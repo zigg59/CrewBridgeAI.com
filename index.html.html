@@ -1,0 +1,2650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CrewbridgeAI — Built for the Trades. Not the Boardroom.</title>
+  <meta name="description" content="AI-powered business systems, automated workflows, and high-converting websites for electricians, plumbers, roofers, landscapers, HVAC, and contractors."/>
+  <style>
+/* ============================================
+   AI TRADES AGENCY — INDUSTRIAL POWER DESIGN
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+
+:root {
+  --bg-dark: #0F0F0D;
+  --bg-light: #F2EFE9;
+  --amber: #F5A623;
+  --steel: #1B3A5C;
+  --text-light: #F7F5F0;
+  --text-dark: #111110;
+  --orange: #E8540A;
+  --amber-dim: rgba(245,166,35,0.12);
+  --amber-glow: rgba(245,166,35,0.35);
+  --noise-dark: rgba(255,255,255,0.015);
+  --border-amber: rgba(245,166,35,0.25);
+  --mid-dark: #181816;
+  --gray-mid: #2A2A26;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'IBM Plex Sans', sans-serif;
+  background: var(--bg-dark);
+  color: var(--text-light);
+  overflow-x: hidden;
+}
+
+/* ---- NOISE TEXTURE OVERLAY ---- */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.4;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+
+/* ---- TYPOGRAPHY ---- */
+.headline {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+}
+
+.mono { font-family: 'IBM Plex Mono', monospace; }
+
+/* ---- NAV ---- */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 48px;
+  background: rgba(15,15,13,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(245,166,35,0.15);
+  transition: padding 0.3s;
+}
+
+nav.scrolled { padding: 12px 48px; }
+
+.nav-logo {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 22px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-light);
+  text-decoration: none;
+}
+
+.nav-logo span { color: var(--amber); }
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(247,245,240,0.6);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--amber); }
+
+.nav-cta {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--orange);
+  color: white;
+  padding: 10px 24px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.nav-cta:hover {
+  background: #ff6318;
+  box-shadow: 0 0 24px rgba(232,84,10,0.5);
+}
+
+/* hamburger */
+.nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+.nav-burger span { width: 26px; height: 2px; background: var(--text-light); transition: all 0.3s; }
+
+/* ---- BUTTONS ---- */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 18px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--orange);
+  color: white;
+  padding: 16px 36px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  position: relative;
+  transition: background 0.2s;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+}
+
+.btn-primary:hover {
+  background: #ff6318;
+  box-shadow: 0 0 40px rgba(232,84,10,0.55);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 18px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: transparent;
+  color: var(--text-light);
+  padding: 15px 35px;
+  border: 1px solid rgba(247,245,240,0.3);
+  cursor: pointer;
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.btn-ghost:hover {
+  border-color: var(--amber);
+  color: var(--amber);
+}
+
+/* ---- DIAGONAL DIVIDER ---- */
+.diag-bottom {
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 60px), 0 100%);
+}
+
+.diag-top {
+  clip-path: polygon(0 60px, 100% 0, 100% 100%, 0 100%);
+  margin-top: -60px;
+}
+
+.diag-both {
+  clip-path: polygon(0 60px, 100% 0, 100% calc(100% - 60px), 0 100%);
+  margin-top: -60px;
+}
+
+/* ============================================
+   HERO
+   ============================================ */
+#hero {
+  min-height: 100vh;
+  background: var(--bg-dark);
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding-top: 80px;
+}
+
+.hero-grid-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(245,166,35,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(245,166,35,0.04) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+.hero-diagonal {
+  position: absolute;
+  right: 0; top: 0; bottom: 0;
+  width: 45%;
+  background: var(--steel);
+  clip-path: polygon(20% 0, 100% 0, 100% 100%, 0 100%);
+  opacity: 0.35;
+}
+
+.hero-diagonal-accent {
+  position: absolute;
+  right: 0; top: 0; bottom: 0;
+  width: 42%;
+  background: linear-gradient(135deg, transparent 30%, rgba(245,166,35,0.08));
+  clip-path: polygon(22% 0, 100% 0, 100% 100%, 2% 100%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 80px;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.hero-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 20px;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.5s 0.2s, transform 0.5s 0.2s;
+}
+
+.hero-label.visible { opacity: 1; transform: translateY(0); }
+
+.hero-headline {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(72px, 9vw, 148px);
+  text-transform: uppercase;
+  line-height: 0.9;
+  letter-spacing: -0.01em;
+  color: var(--text-light);
+  margin-bottom: 32px;
+  max-width: 800px;
+}
+
+.hl-line {
+  display: block;
+}
+
+.hl-inner {
+  display: block;
+  opacity: 0;
+  transform: translateY(28px);
+  transition: transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.55s ease;
+}
+
+.hero-headline .accent { color: var(--amber); }
+
+.hero-sub {
+  font-size: 17px;
+  line-height: 1.65;
+  color: rgba(247,245,240,0.65);
+  max-width: 520px;
+  margin-bottom: 44px;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s 0.8s, transform 0.6s 0.8s;
+}
+
+.hero-sub.visible { opacity: 1; transform: translateY(0); }
+
+.hero-ctas {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.6s 1s, transform 0.6s 1s;
+}
+
+.hero-ctas.visible { opacity: 1; transform: translateY(0); }
+
+.hero-stats {
+  display: flex;
+  gap: 48px;
+  margin-top: 80px;
+  padding-top: 40px;
+  border-top: 1px solid rgba(245,166,35,0.2);
+  opacity: 0;
+  transition: opacity 0.6s 1.2s;
+}
+
+.hero-stats.visible { opacity: 1; }
+
+.hero-stat-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 52px;
+  color: var(--amber);
+  line-height: 1;
+}
+
+.hero-stat-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(247,245,240,0.5);
+  margin-top: 4px;
+}
+
+/* ============================================
+   CREDIBILITY BAR
+   ============================================ */
+#credibility {
+  background: var(--amber);
+  padding: 18px 48px;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  overflow: hidden;
+}
+
+.cred-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(15,15,13,0.6);
+  white-space: nowrap;
+  margin-right: 40px;
+  flex-shrink: 0;
+}
+
+.cred-track {
+  display: flex;
+  gap: 0;
+  animation: marquee 20s linear infinite;
+  flex-shrink: 0;
+}
+
+.cred-item {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 17px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-dark);
+  padding: 0 32px;
+  border-right: 2px solid rgba(15,15,13,0.2);
+  white-space: nowrap;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ============================================
+   PROBLEM SECTION
+   ============================================ */
+#problem {
+  background: var(--bg-light);
+  padding: 120px 80px;
+  position: relative;
+}
+
+.problem-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.problem-left h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 58px;
+  text-transform: uppercase;
+  color: var(--text-dark);
+  margin-bottom: 40px;
+  line-height: 0.95;
+}
+
+.problem-list { list-style: none; }
+
+.problem-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(17,17,16,0.1);
+  font-size: 16px;
+  color: rgba(17,17,16,0.75);
+  line-height: 1.5;
+  transform: translateX(-30px);
+  opacity: 0;
+  transition: transform 0.5s, opacity 0.5s;
+}
+
+.problem-item.visible { transform: translateX(0); opacity: 1; }
+
+.problem-item::before {
+  content: '—';
+  color: var(--orange);
+  font-weight: 700;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.problem-right {
+  background: var(--bg-dark);
+  padding: 56px 48px;
+  position: relative;
+  clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px));
+}
+
+.problem-right::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 5px;
+  background: var(--amber);
+}
+
+.problem-stat-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 88px;
+  color: var(--amber);
+  line-height: 0.9;
+  margin-bottom: 16px;
+}
+
+.problem-stat-text {
+  font-size: 15px;
+  color: rgba(247,245,240,0.7);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+.problem-stat-source {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: rgba(247,245,240,0.3);
+  text-transform: uppercase;
+}
+
+/* ============================================
+   SERVICES
+   ============================================ */
+#services {
+  background: var(--bg-dark);
+  padding: 120px 0 60px;
+}
+
+.services-header {
+  padding: 0 80px;
+  margin-bottom: 80px;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(52px, 6vw, 88px);
+  text-transform: uppercase;
+  color: var(--text-light);
+  line-height: 0.92;
+}
+
+.service-row {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  align-items: start;
+  padding: 60px 80px;
+  border-top: 1px solid rgba(245,166,35,0.12);
+  position: relative;
+  max-width: 1400px;
+  margin: 0 auto;
+  transform: translateX(-40px);
+  opacity: 0;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.6s;
+}
+
+.service-row.visible { transform: translateX(0); opacity: 1; }
+
+.service-row::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 5px;
+  background: var(--amber);
+}
+
+.service-row:nth-child(2)::before { background: var(--orange); }
+.service-row:nth-child(3)::before { background: var(--steel); }
+.service-row:nth-child(4)::before { background: var(--amber); }
+
+.service-num {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 72px;
+  color: var(--amber);
+  line-height: 1;
+  opacity: 0.4;
+}
+
+.service-content { padding-left: 40px; }
+
+.service-name {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(36px, 4vw, 60px);
+  text-transform: uppercase;
+  color: var(--text-light);
+  line-height: 0.95;
+  margin-bottom: 24px;
+}
+
+.service-features {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px 40px;
+}
+
+.service-features li {
+  font-size: 14px;
+  color: rgba(247,245,240,0.6);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.service-features li::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: var(--amber);
+  flex-shrink: 0;
+  transform: rotate(45deg);
+}
+
+/* ============================================
+   WHO WE BUILD FOR
+   ============================================ */
+#trades {
+  background: var(--bg-light);
+  padding: 120px 80px;
+  clip-path: polygon(0 60px, 100% 0, 100% calc(100% - 60px), 0 100%);
+  margin-top: -60px;
+  padding-top: 180px;
+  padding-bottom: 180px;
+}
+
+.trades-header { max-width: 1200px; margin: 0 auto 64px; }
+
+.trades-header h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(52px, 6vw, 88px);
+  text-transform: uppercase;
+  color: var(--text-dark);
+  line-height: 0.92;
+}
+
+.trades-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+
+.trade-card {
+  background: var(--bg-dark);
+  padding: 40px 36px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.trade-card:hover { transform: translateY(-4px); }
+
+.trade-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+  background: var(--amber);
+  transform: scaleY(0);
+  transition: transform 0.3s;
+  transform-origin: bottom;
+}
+
+.trade-card:hover::before { transform: scaleY(1); }
+
+.trade-icon {
+  font-size: 36px;
+  margin-bottom: 16px;
+  filter: grayscale(1) brightness(1.5);
+  transition: filter 0.3s;
+}
+
+.trade-card:hover .trade-icon { filter: none; }
+
+.trade-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 28px;
+  text-transform: uppercase;
+  color: var(--text-light);
+  margin-bottom: 16px;
+}
+
+.trade-uses {
+  list-style: none;
+  margin-bottom: 24px;
+}
+
+.trade-uses li {
+  font-size: 13px;
+  color: rgba(247,245,240,0.55);
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(247,245,240,0.06);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.trade-uses li::before {
+  content: '›';
+  color: var(--amber);
+  font-size: 16px;
+}
+
+.trade-link {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--amber);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: gap 0.2s;
+}
+
+.trade-link:hover { gap: 14px; }
+
+/* ============================================
+   HOW IT WORKS
+   ============================================ */
+#how {
+  background: var(--bg-dark);
+  padding: 120px 80px;
+  position: relative;
+  clip-path: polygon(0 0, 100% 60px, 100% 100%, 0 calc(100% - 60px));
+  padding-top: 180px;
+  padding-bottom: 180px;
+  margin-top: -60px;
+}
+
+.how-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.how-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin-top: 64px;
+}
+
+.how-step {
+  padding: 48px 40px;
+  background: var(--mid-dark);
+  position: relative;
+  transform: translateY(30px);
+  opacity: 0;
+  transition: transform 0.5s, opacity 0.5s;
+}
+
+.how-step.visible { transform: translateY(0); opacity: 1; }
+.how-step:nth-child(2) { transition-delay: 0.15s; }
+.how-step:nth-child(3) { transition-delay: 0.3s; }
+
+.how-step-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--amber);
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+.how-step-title {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 40px;
+  text-transform: uppercase;
+  color: var(--text-light);
+  line-height: 0.95;
+  margin-bottom: 16px;
+}
+
+.how-step-desc {
+  font-size: 14px;
+  color: rgba(247,245,240,0.55);
+  line-height: 1.7;
+}
+
+.how-step::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--amber);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.5s;
+}
+
+.how-step.visible::after { transform: scaleX(1); transition-delay: 0.5s; }
+
+/* ============================================
+   DASHBOARD MOCK
+   ============================================ */
+#dashboard {
+  background: var(--mid-dark);
+  padding: 120px 80px;
+  position: relative;
+}
+
+.dashboard-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.dashboard-mock {
+  margin-top: 64px;
+  background: #0A0A08;
+  border: 1px solid rgba(245,166,35,0.2);
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.6), 0 0 0 1px rgba(245,166,35,0.1);
+}
+
+.dash-titlebar {
+  background: #161614;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid rgba(245,166,35,0.1);
+}
+
+.dash-dot { width: 10px; height: 10px; border-radius: 50%; }
+.dash-dot.red { background: #E85C5C; }
+.dash-dot.yellow { background: var(--amber); }
+.dash-dot.green { background: #4CAF7C; }
+
+.dash-title {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: rgba(247,245,240,0.4);
+  letter-spacing: 0.08em;
+  margin-left: 8px;
+}
+
+.dash-body {
+  display: grid;
+  grid-template-columns: 220px 1fr 300px;
+  min-height: 520px;
+}
+
+.dash-sidebar {
+  background: #111110;
+  border-right: 1px solid rgba(247,245,240,0.06);
+  padding: 24px 0;
+}
+
+.dash-nav-item {
+  padding: 12px 24px;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: rgba(247,245,240,0.4);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-left-color 0.2s;
+  border-left: 2px solid transparent;
+  user-select: none;
+}
+
+.dash-nav-item:hover, .dash-nav-item.active {
+  background: rgba(245,166,35,0.08);
+  color: var(--amber);
+  border-left-color: var(--amber);
+}
+
+.dash-nav-item .dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+.dash-main { padding: 28px; overflow: hidden; }
+
+.dash-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.dash-metric {
+  background: #161614;
+  padding: 18px;
+  border: 1px solid rgba(247,245,240,0.06);
+}
+
+.dash-metric-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.12em;
+  color: rgba(247,245,240,0.35);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.dash-metric-val {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 32px;
+  color: var(--text-light);
+}
+
+.dash-metric-val.amber { color: var(--amber); }
+.dash-metric-val.green { color: #4CAF7C; }
+
+.dash-feed-title {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(247,245,240,0.4);
+  margin-bottom: 16px;
+}
+
+.dash-feed-item {
+  background: #161614;
+  border: 1px solid rgba(247,245,240,0.06);
+  padding: 14px 16px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  transform: translateX(-20px);
+  opacity: 0;
+  transition: transform 0.4s, opacity 0.4s;
+}
+
+.dash-feed-item.visible { transform: translateX(0); opacity: 1; }
+
+.feed-status {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.feed-status.amber { background: var(--amber); animation: pulse-dot 2s infinite; }
+.feed-status.green { background: #4CAF7C; }
+.feed-status.blue { background: #4A8FDB; }
+
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.7); }
+}
+
+.feed-text {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: rgba(247,245,240,0.7);
+  flex: 1;
+}
+
+.feed-time {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  color: rgba(247,245,240,0.25);
+}
+
+.dash-panel {
+  border-left: 1px solid rgba(247,245,240,0.06);
+  padding: 24px;
+  background: #0D0D0B;
+}
+
+.dash-panel-title {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(247,245,240,0.4);
+  margin-bottom: 20px;
+}
+
+.dash-ai-bubble {
+  background: rgba(245,166,35,0.1);
+  border: 1px solid rgba(245,166,35,0.2);
+  padding: 14px;
+  margin-bottom: 12px;
+  font-size: 12px;
+  color: rgba(247,245,240,0.8);
+  line-height: 1.6;
+  position: relative;
+}
+
+.dash-ai-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 9px;
+  color: var(--amber);
+  letter-spacing: 0.1em;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+}
+
+.dash-action-btn {
+  width: 100%;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 10px;
+  border: 1px solid rgba(245,166,35,0.3);
+  background: transparent;
+  color: var(--amber);
+  cursor: pointer;
+  margin-bottom: 8px;
+  transition: background 0.2s;
+  text-align: left;
+}
+
+.dash-action-btn:hover { background: rgba(245,166,35,0.1); }
+
+/* ============================================
+   RESULTS / TESTIMONIALS
+   ============================================ */
+#results {
+  background: var(--bg-light);
+  padding: 120px 80px;
+}
+
+.results-inner { max-width: 1200px; margin: 0 auto; }
+
+.results-inner h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(52px, 6vw, 88px);
+  text-transform: uppercase;
+  color: var(--text-dark);
+  line-height: 0.92;
+  margin-bottom: 64px;
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+
+.result-card {
+  background: var(--bg-dark);
+  padding: 48px 40px;
+  position: relative;
+  overflow: hidden;
+  transform: translateY(30px);
+  opacity: 0;
+  transition: transform 0.5s, opacity 0.5s;
+}
+
+.result-card.visible { transform: translateY(0); opacity: 1; }
+.result-card:nth-child(2) { transition-delay: 0.12s; }
+.result-card:nth-child(3) { transition-delay: 0.24s; }
+
+.result-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--amber);
+}
+
+.result-quote {
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--text-light);
+  margin-bottom: 32px;
+  font-style: italic;
+}
+
+.result-quote::before {
+  content: '"';
+  font-family: 'Barlow Condensed', sans-serif;
+  font-size: 72px;
+  color: var(--amber);
+  line-height: 0.6;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.result-author {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: rgba(247,245,240,0.45);
+  text-transform: uppercase;
+}
+
+.result-stat {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 48px;
+  color: var(--amber);
+  line-height: 1;
+  margin-bottom: 8px;
+}
+
+/* ============================================
+   CUSTOM SOLUTIONS
+   ============================================ */
+#custom {
+  background: var(--steel);
+  padding: 120px 80px;
+  position: relative;
+  clip-path: polygon(0 60px, 100% 0, 100% calc(100% - 60px), 0 100%);
+  margin-top: -60px;
+  padding-top: 180px;
+  padding-bottom: 180px;
+}
+
+.custom-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.custom-inner h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(64px, 8vw, 120px);
+  text-transform: uppercase;
+  color: var(--text-light);
+  line-height: 0.9;
+  margin-bottom: 24px;
+}
+
+.custom-inner p {
+  font-size: 18px;
+  color: rgba(247,245,240,0.7);
+  margin-bottom: 48px;
+  line-height: 1.7;
+}
+
+/* ============================================
+   PRICING
+   ============================================ */
+#pricing {
+  background: var(--bg-dark);
+  padding: 120px 80px;
+  position: relative;
+  margin-top: -60px;
+  clip-path: polygon(0 0, 100% 60px, 100% 100%, 0 100%);
+  padding-top: 180px;
+}
+
+.pricing-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin-top: 64px;
+}
+
+.price-card {
+  background: var(--mid-dark);
+  padding: 48px 36px;
+  position: relative;
+  border: 1px solid rgba(247,245,240,0.06);
+}
+
+.price-card.featured {
+  background: var(--steel);
+  border-color: var(--amber);
+  transform: scale(1.02);
+}
+
+.price-badge {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  background: var(--amber);
+  color: var(--text-dark);
+  padding: 4px 12px;
+  position: absolute;
+  top: -1px;
+  left: 36px;
+  font-weight: 600;
+}
+
+.price-tier {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 28px;
+  text-transform: uppercase;
+  color: var(--text-light);
+  margin-bottom: 8px;
+}
+
+.price-amount {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 64px;
+  color: var(--amber);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+
+.price-period {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: rgba(247,245,240,0.4);
+  letter-spacing: 0.08em;
+  margin-bottom: 32px;
+}
+
+.price-features {
+  list-style: none;
+  margin-bottom: 36px;
+}
+
+.price-features li {
+  font-size: 14px;
+  color: rgba(247,245,240,0.65);
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(247,245,240,0.06);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.price-features li::before {
+  content: '✓';
+  color: var(--amber);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* ============================================
+   FAQ
+   ============================================ */
+#faq {
+  background: var(--bg-light);
+  padding: 120px 80px;
+}
+
+.faq-inner {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.faq-inner h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(52px, 6vw, 80px);
+  text-transform: uppercase;
+  color: var(--text-dark);
+  margin-bottom: 64px;
+  line-height: 0.92;
+}
+
+.faq-item {
+  border-top: 2px solid rgba(17,17,16,0.12);
+  overflow: hidden;
+}
+
+.faq-q {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 24px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  text-align: left;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: 22px;
+  text-transform: uppercase;
+  color: var(--text-dark);
+  letter-spacing: 0.02em;
+  gap: 20px;
+}
+
+.faq-arrow {
+  width: 24px; height: 24px;
+  border: 2px solid var(--orange);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: var(--orange);
+  transition: transform 0.3s;
+}
+
+.faq-item.open .faq-arrow { transform: rotate(45deg); }
+
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease;
+}
+
+.faq-a-inner {
+  padding: 0 0 24px;
+  font-size: 15px;
+  color: rgba(17,17,16,0.65);
+  line-height: 1.75;
+}
+
+/* ============================================
+   CLOSING CTA
+   ============================================ */
+#closing {
+  background: var(--bg-dark);
+  padding: 120px 80px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+#closing::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(232,84,10,0.12), transparent);
+  pointer-events: none;
+}
+
+.closing-inner { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
+
+.closing-inner h2 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(52px, 7vw, 108px);
+  text-transform: uppercase;
+  color: var(--text-light);
+  line-height: 0.9;
+  margin-bottom: 24px;
+}
+
+.closing-inner h2 span { color: var(--orange); }
+
+.closing-inner p {
+  font-size: 17px;
+  color: rgba(247,245,240,0.55);
+  margin-bottom: 48px;
+  line-height: 1.65;
+}
+
+.closing-form {
+  display: flex;
+  gap: 0;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.closing-input {
+  flex: 1;
+  background: rgba(247,245,240,0.06);
+  border: 1px solid rgba(247,245,240,0.15);
+  border-right: none;
+  padding: 16px 20px;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 14px;
+  color: var(--text-light);
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.closing-input::placeholder { color: rgba(247,245,240,0.3); }
+.closing-input:focus { border-color: var(--amber); }
+
+.closing-submit {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: 16px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: var(--orange);
+  color: white;
+  padding: 16px 32px;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+
+.closing-submit:hover {
+  background: #ff6318;
+  box-shadow: 0 0 40px rgba(232,84,10,0.5);
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+footer {
+  background: #070707;
+  padding: 80px 80px 40px;
+  border-top: 1px solid rgba(245,166,35,0.15);
+}
+
+.footer-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 60px;
+  margin-bottom: 60px;
+}
+
+.footer-brand p {
+  font-size: 14px;
+  color: rgba(247,245,240,0.4);
+  line-height: 1.7;
+  margin-top: 16px;
+  max-width: 260px;
+}
+
+.footer-col-title {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 20px;
+}
+
+.footer-links {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-links a {
+  font-size: 14px;
+  color: rgba(247,245,240,0.45);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-links a:hover { color: var(--text-light); }
+
+.footer-bottom {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-top: 32px;
+  border-top: 1px solid rgba(247,245,240,0.07);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-copy {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  color: rgba(247,245,240,0.25);
+  letter-spacing: 0.06em;
+}
+
+.footer-socials {
+  display: flex;
+  gap: 20px;
+}
+
+.social-link {
+  width: 36px; height: 36px;
+  border: 1px solid rgba(247,245,240,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: rgba(247,245,240,0.4);
+  text-decoration: none;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.social-link:hover { border-color: var(--amber); color: var(--amber); }
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1024px) {
+  nav { padding: 16px 32px; }
+  .nav-links { display: none; }
+  .nav-burger { display: flex; }
+  
+  .hero-content { padding: 0 32px; }
+  #problem, #services, #trades, #how, #dashboard,
+  #results, #custom, #pricing, #faq, #closing, footer {
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+  
+  .problem-grid { grid-template-columns: 1fr; gap: 48px; }
+  .service-row { grid-template-columns: 80px 1fr; padding: 48px 32px; }
+  .trades-grid { grid-template-columns: 1fr 1fr; }
+  .how-steps { grid-template-columns: 1fr; }
+  .results-grid { grid-template-columns: 1fr; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .price-card.featured { transform: scale(1); }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
+  .dash-body { grid-template-columns: 1fr; }
+  .dash-sidebar, .dash-panel { display: none; }
+}
+
+@media (max-width: 640px) {
+  .hero-headline { font-size: 56px; }
+  .hero-content { padding: 0 20px; }
+  .hero-stats { flex-wrap: wrap; gap: 28px; }
+  .trades-grid { grid-template-columns: 1fr; }
+  .service-features { grid-template-columns: 1fr; }
+  #trades, #how, #custom { 
+    clip-path: none; 
+    margin-top: 0;
+    padding: 80px 20px;
+  }
+  #pricing { clip-path: none; margin-top: 0; padding-top: 80px; }
+  .closing-form { flex-direction: column; }
+  .closing-input { border-right: 1px solid rgba(247,245,240,0.15); }
+  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+  .footer-bottom { flex-direction: column; gap: 20px; }
+  #problem, #services, #results, #faq, #closing, #dashboard, footer {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+/* Mobile nav menu */
+.mobile-menu {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-dark);
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.mobile-menu.open { transform: translateX(0); }
+
+.mobile-menu a {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: 48px;
+  text-transform: uppercase;
+  color: var(--text-light);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.mobile-menu a:hover { color: var(--amber); }
+
+/* ============================================
+   WHATSAPP FLOATING BUTTON
+   ============================================ */
+.whatsapp-fab {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 60px;
+  height: 60px;
+  background: #25D366;
+  border-radius: 50%;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 0 0 0 rgba(37,211,102,0.4);
+  animation: whatsappPulse 2s infinite;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.whatsapp-fab::before {
+  content: '';
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(37,211,102,0.15);
+  filter: blur(8px);
+  z-index: -1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.whatsapp-fab:hover {
+  transform: scale(1.1);
+  background: #20BA5A;
+}
+
+.whatsapp-fab svg {
+  width: 32px;
+  height: 32px;
+}
+
+.whatsapp-tooltip {
+  position: absolute;
+  right: 76px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #25D366;
+  color: white;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 999px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.whatsapp-tooltip::after {
+  content: '';
+  position: absolute;
+  right: -5px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 0;
+  height: 0;
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 6px solid #25D366;
+}
+
+.whatsapp-fab:hover .whatsapp-tooltip {
+  opacity: 1;
+}
+
+@keyframes whatsappPulse {
+  0%   { box-shadow: 0 0 0 0 rgba(37,211,102,0.4); }
+  70%  { box-shadow: 0 0 0 20px rgba(37,211,102,0); }
+  100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
+}
+
+@media (max-width: 640px) {
+  .whatsapp-tooltip { display: none; }
+}
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg-dark); }
+::-webkit-scrollbar-thumb { background: var(--amber); }
+
+</style>
+<script type='text/javascript' nonce='6TLrjYrTzFsa59MnR+3dyw==' src='https://claude.ai/IYjmz0Y1AS28ilLCTMK3ap_mn7gGIZzLGAYspHZSvS3jSvQjwih2zLHvXCH-LbR9HHfWCHatWjtdr_bouXX_MhR5T6fFrOWS882yTYe8OHDqBFwxQVrT0RCjKNwBtX9jZImlnUPF8Ib2EdsVdW5wZgbh9-qccfN3o1QHpMyAjpt2dRpqbRhIc5B3zSqUYaR4xmouZEpolPinDjb_r0DtnrNmqNnJq9NqB3ByRSs7GvC9zf2GpAZ3ga0d7Mw2nlc0LM_Oe-WOyy1-SxTeceG9pryzq-IvEl0Cn4mqHft5SD68hzYubiWGqefYJCFKrfeYeg8AGWyH4H1BLC4DpUwZEqVpU45VSHhbdsYo4-gQO4GU7mt5zGIof78kpUWEI290rq-1am8xmovKh1oSOHWaxkzkR4lJP9epgSQGfKJTSw5bEAuTt1wwAm0fC_liQd1A754Re2ctXoUAtgQpY18fp38dxeq1TtBpFDvTwdtqGxvBmNaoWVkgXwqD7B5Y5k0oPBYg282FsmbGbmidrnVnMWSD0_-arC0UPRyue1EauajUnEODuTdUp3vbqw'></script></head>
+<body>
+
+<!-- ============ MOBILE MENU ============ -->
+<div class="mobile-menu">
+  <a href="#services">Services</a>
+  <a href="#trades">Who We Build For</a>
+  <a href="#how">How It Works</a>
+  <a href="#pricing">Pricing</a>
+  <a href="#faq">FAQ</a>
+  <a href="#closing" class="nav-cta" style="font-size:28px;padding:14px 36px;">Get Free Audit</a>
+</div>
+
+<!-- ============ NAV ============ -->
+<nav>
+  <a class="nav-logo" href="#">Crewbridge<span>AI</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#trades">Who We Build For</a></li>
+    <li><a href="#how">How It Works</a></li>
+    <li><a href="#dashboard">Live Demo</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <a href="#closing" class="nav-cta">Get Free Audit</a>
+  <div class="nav-burger" role="button" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section id="hero">
+  <div class="hero-grid-bg"></div>
+  <div class="hero-diagonal"></div>
+  <div class="hero-diagonal-accent"></div>
+
+  <div class="hero-content">
+    <p class="hero-label mono">// AI Systems for the Trades Industry</p>
+
+    <h1 class="hero-headline">
+      <div class="hl-line"><div class="hl-inner">AI Built for</div></div>
+      <div class="hl-line"><div class="hl-inner accent">the Trades.</div></div>
+      <div class="hl-line"><div class="hl-inner" style="color:rgba(247,245,240,0.3)">Not the</div></div>
+      <div class="hl-line"><div class="hl-inner" style="color:rgba(247,245,240,0.3)">Boardroom.</div></div>
+    </h1>
+
+    <p class="hero-sub">We build custom AI systems, automated workflows, and high-converting websites for electricians, plumbers, roofers, landscapers, and every trade in between.</p>
+
+    <div class="hero-ctas">
+      <a href="#closing" class="btn-primary">Get Your Free AI Audit →</a>
+      <a href="#services" class="btn-ghost">See What We Build</a>
+    </div>
+
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-num"><span data-count="12" data-suffix="hrs">0hrs</span></div>
+        <div class="hero-stat-label mono">Saved per week avg.</div>
+      </div>
+      <div>
+        <div class="hero-stat-num"><span data-count="30" data-suffix="%">0%</span></div>
+        <div class="hero-stat-label mono">More jobs closed</div>
+      </div>
+      <div>
+        <div class="hero-stat-num"><span data-count="90" data-suffix="s">0s</span></div>
+        <div class="hero-stat-label mono">AI follow-up response</div>
+      </div>
+      <div>
+        <div class="hero-stat-num"><span data-count="500" data-suffix="+">0+</span></div>
+        <div class="hero-stat-label mono">Trade businesses served</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CREDIBILITY BAR ============ -->
+<div id="credibility">
+  <span class="cred-label mono">Trusted by trade businesses across:</span>
+  <div style="overflow:hidden;flex:1;display:flex;">
+    <div class="cred-track">
+      <span class="cred-item">⚡ Electrical</span>
+      <span class="cred-item">🔧 Plumbing</span>
+      <span class="cred-item">🏠 Roofing</span>
+      <span class="cred-item">🌿 Landscaping</span>
+      <span class="cred-item">❄️ HVAC</span>
+      <span class="cred-item">🔨 General Contracting</span>
+      <span class="cred-item">🪟 Windows & Doors</span>
+      <span class="cred-item">🔌 Low Voltage</span>
+      <span class="cred-item">🏊 Pool Service & Repair</span>
+      <span class="cred-item">🔩 Auto & Mobile Mechanics</span>
+      <span class="cred-item">🧹 Janitorial & Commercial Cleaning</span>
+      <span class="cred-item">⚡ Electrical</span>
+      <span class="cred-item">🔧 Plumbing</span>
+      <span class="cred-item">🏠 Roofing</span>
+      <span class="cred-item">🌿 Landscaping</span>
+      <span class="cred-item">❄️ HVAC</span>
+      <span class="cred-item">🔨 General Contracting</span>
+      <span class="cred-item">🪟 Windows & Doors</span>
+      <span class="cred-item">🔌 Low Voltage</span>
+      <span class="cred-item">🏊 Pool Service & Repair</span>
+      <span class="cred-item">🔩 Auto & Mobile Mechanics</span>
+      <span class="cred-item">🧹 Janitorial & Commercial Cleaning</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============ THE PROBLEM ============ -->
+<section id="problem" class="diag-bottom">
+  <div class="problem-grid">
+    <div class="problem-left">
+      <h2>Sound<br/>Familiar?</h2>
+      <ul class="problem-list">
+        <li class="problem-item">Leads falling through the cracks while you're on the job</li>
+        <li class="problem-item">Spending nights on invoices instead of time with family</li>
+        <li class="problem-item">Competitors with better websites stealing your jobs</li>
+        <li class="problem-item">No system to follow up with past customers automatically</li>
+        <li class="problem-item">Dispatching jobs manually, missing double-bookings</li>
+        <li class="problem-item">Chasing down reviews one awkward ask at a time</li>
+      </ul>
+    </div>
+    <div class="problem-right">
+      <div class="problem-stat-num">
+        <span data-count="12" data-suffix="hrs">12hrs</span>
+      </div>
+      <p class="problem-stat-text" style="font-size:20px;font-family:&#39;Barlow Condensed&#39;,sans-serif;font-weight:700;text-transform:uppercase;color:var(--amber);margin-bottom:8px;">Saved. Every. Week.</p>
+      <p class="problem-stat-text">Trade businesses that deploy our AI automation report saving 12+ hours a week and closing 30% more jobs — without hiring a single extra person.</p>
+      <p class="problem-stat-source mono">// Internal client data · 2024–2025 cohort</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SERVICES ============ -->
+<section id="services">
+  <div class="services-header">
+    <p class="section-label mono">// What We Deploy</p>
+    <h2 class="section-title">Systems That<br/>Make You Money</h2>
+  </div>
+
+  <div class="service-row">
+    <div class="service-num">01</div>
+    <div class="service-content">
+      <h3 class="service-name">AI Business<br/>Management Systems</h3>
+      <ul class="service-features">
+        <li>Automated job scheduling & dispatching</li>
+        <li>AI-powered customer follow-up & reminders</li>
+        <li>Estimates & invoice automation</li>
+        <li>Lead tracking CRM built for trades</li>
+        <li>Review generation on autopilot</li>
+        <li>Real-time job status dashboards</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="service-row">
+    <div class="service-num">02</div>
+    <div class="service-content">
+      <h3 class="service-name">Custom Trade<br/>Websites</h3>
+      <ul class="service-features">
+        <li>Built-for-trades: fast, mobile, conversion-focused</li>
+        <li>Online booking integration & quote forms</li>
+        <li>SEO-optimized for local search dominance</li>
+        <li>Click-to-call, trust badges, photo galleries</li>
+        <li>Google Business Profile sync</li>
+        <li>Ongoing updates included</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="service-row">
+    <div class="service-num">03</div>
+    <div class="service-content">
+      <h3 class="service-name">AI Deployment<br/>for Your Trade</h3>
+      <ul class="service-features">
+        <li>Electricians — permit tracking & job costing AI</li>
+        <li>Plumbers — emergency dispatch automation</li>
+        <li>Roofers — photo-to-estimate AI workflows</li>
+        <li>Landscapers — seasonal scheduling automation</li>
+        <li>HVAC — maintenance reminder systems</li>
+        <li>Contractors — subcontractor coordination tools</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="service-row">
+    <div class="service-num">04</div>
+    <div class="service-content">
+      <h3 class="service-name">Custom AI<br/>Solutions</h3>
+      <ul class="service-features">
+        <li>Bespoke automation built around your exact workflow</li>
+        <li>Integrations: QuickBooks, ServiceTitan, Jobber</li>
+        <li>Staff training & onboarding support</li>
+        <li>Ongoing system management & updates</li>
+        <li>Multi-location enterprise deployments</li>
+        <li>White-glove setup & go-live support</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHO WE BUILD FOR ============ -->
+<section id="trades">
+  <div class="trades-header">
+    <p class="section-label mono">// Trade Verticals</p>
+    <h2>Who We<br/>Build For</h2>
+  </div>
+  <div class="trades-grid">
+
+    <div class="trade-card">
+      <div class="trade-icon">⚡</div>
+      <h3 class="trade-title">Built for Electricians</h3>
+      <ul class="trade-uses">
+        <li>AI permit tracking & job costing</li>
+        <li>Automated quote follow-up sequences</li>
+        <li>Inspection scheduling & reminders</li>
+      </ul>
+      <a href="#closing" class="trade-link mono">Learn More →</a>
+    </div>
+
+    <div class="trade-card">
+      <div class="trade-icon">🔧</div>
+      <h3 class="trade-title">Built for Plumbers</h3>
+      <ul class="trade-uses">
+        <li>Emergency dispatch automation</li>
+        <li>After-hours AI triage & booking</li>
+        <li>Maintenance plan renewal automation</li>
+      </ul>
+      <a href="#closing" class="trade-link mono">Learn More →</a>
+    </div>
+
+    <div class="trade-card">
+      <div class="trade-icon">🏠</div>
+      <h3 class="trade-title">Built for Roofers</h3>
+      <ul class="trade-uses">
+        <li>Photo-to-estimate AI workflows</li>
+        <li>Storm season lead surge handling</li>
+        <li>Insurance claim follow-up automation</li>
+      </ul>
+      <a href="#closing" class="trade-link mono">Learn More →</a>
+    </div>
+
+    <div class="trade-card">
+      <div class="trade-icon">🌿</div>
+      <h3 class="trade-title">Built for Landscapers</h3>
+      <ul class="trade-uses">
+        <li>Seasonal scheduling automation</li>
+        <li>Recurring contract renewal sequences</li>
+        <li>Route optimization & crew dispatch</li>
+      </ul>
+      <a href="#closing" class="trade-link mono">Learn More →</a>
+    </div>
+
+    <div class="trade-card">
+      <div class="trade-icon">❄️</div>
+      <h3 class="trade-title">Built for HVAC</h3>
+      <ul class="trade-uses">
+        <li>Maintenance reminder systems</li>
+        <li>Peak season demand management</li>
+        <li>Filter subscription & upsell automation</li>
+      </ul>
+      <a href="#closing" class="trade-link mono">Learn More →</a>
+    </div>
+
+    <div class="trade-card">
+      <div class="trade-icon">🔨</div>
+      <h3 class="trade-title">Built for Contractors</h3>
+      <ul class="trade-uses">
+        <li>Subcontractor coordination tools</li>
+        <li>Project milestone billing automation</li>
+        <li>RFI & change order tracking AI</li>
+      </ul>
+      <a href="#closing" class="trade-link mono">Learn More →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section id="how">
+  <div class="how-inner">
+    <p class="section-label mono">// The Process</p>
+    <h2 class="section-title">Three Steps.<br/>Zero Fluff.</h2>
+    <div class="how-steps">
+      <div class="how-step">
+        <p class="how-step-num mono">Step 01 /</p>
+        <h3 class="how-step-title">Free<br/>AI Audit</h3>
+        <p class="how-step-desc">We map your current workflow end-to-end, identify where leads die, time bleeds, and money is left on the table. No cost. No commitment. Just clarity.</p>
+      </div>
+      <div class="how-step">
+        <p class="how-step-num mono">Step 02 /</p>
+        <h3 class="how-step-title">We<br/>Build It</h3>
+        <p class="how-step-desc">Custom system designed around your exact trade, team size, and tools. We handle setup, integration, and testing. You stay on the job while we wire it all up.</p>
+      </div>
+      <div class="how-step">
+        <p class="how-step-num mono">Step 03 /</p>
+        <h3 class="how-step-title">You Run<br/>Smarter</h3>
+        <p class="how-step-desc">Fully automated, trained, and supported by our team. Your system runs 24/7. When something needs updating, we're on it — you just collect the results.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DASHBOARD MOCK ============ -->
+<section id="dashboard">
+  <div class="dashboard-inner">
+    <p class="section-label mono">// Live System Preview</p>
+    <h2 class="section-title">Watch the Machine<br/>Work for You</h2>
+    <p style="color:rgba(247,245,240,0.5);margin-top:16px;font-size:15px;max-width:560px;">This is what your business looks like when it runs on CrewbridgeAI. Every lead captured, every follow-up sent, every invoice automated — without you lifting a finger.</p>
+
+    <div class="dashboard-mock">
+      <!-- titlebar -->
+      <div class="dash-titlebar">
+        <div class="dash-dot red"></div>
+        <div class="dash-dot yellow"></div>
+        <div class="dash-dot green"></div>
+        <span class="dash-title">CrewbridgeAI — Business Command Center · Live</span>
+        <div style="margin-left:auto;display:flex;align-items:center;gap:8px;">
+          <div style="width:8px;height:8px;border-radius:50%;background:#4CAF7C;animation:pulse-dot 1.5s infinite;"></div>
+          <span class="dash-title">SYSTEM ONLINE</span>
+        </div>
+      </div>
+
+      <!-- body -->
+      <div class="dash-body">
+        <!-- sidebar -->
+        <div class="dash-sidebar">
+          <div style="padding:12px 24px 24px;border-bottom:1px solid rgba(247,245,240,0.06);margin-bottom:8px;">
+            <div style="font-family:&#39;IBM Plex Mono&#39;,monospace;font-size:9px;color:rgba(247,245,240,0.25);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:4px;">Workspace</div>
+            <div style="font-family:&#39;Barlow Condensed&#39;,sans-serif;font-weight:700;font-size:16px;color:var(--text-light);">APEX ELECTRIC CO.</div>
+          </div>
+          <div class="dash-nav-item active" data-view="command"><span class="dot"></span>Command Center</div>
+          <div class="dash-nav-item" data-view="leads"><span class="dot"></span>Leads & CRM</div>
+          <div class="dash-nav-item" data-view="scheduler"><span class="dot"></span>Job Scheduler</div>
+          <div class="dash-nav-item" data-view="invoices"><span class="dot"></span>Invoices</div>
+          <div class="dash-nav-item" data-view="automations"><span class="dot"></span>AI Automations</div>
+          <div class="dash-nav-item" data-view="reviews"><span class="dot"></span>Reviews</div>
+          <div class="dash-nav-item" data-view="analytics"><span class="dot"></span>Analytics</div>
+          <div class="dash-nav-item" data-view="settings"><span class="dot"></span>Settings</div>
+        </div>
+
+        <!-- main -->
+        <div class="dash-main" id="dashMain">
+          <div class="dash-metrics">
+            <div class="dash-metric">
+              <div class="dash-metric-label">New Leads Today</div>
+              <div class="dash-metric-val amber dash-leads">47</div>
+            </div>
+            <div class="dash-metric">
+              <div class="dash-metric-label">Jobs Scheduled</div>
+              <div class="dash-metric-val">23</div>
+            </div>
+            <div class="dash-metric">
+              <div class="dash-metric-label">Revenue This Week</div>
+              <div class="dash-metric-val green">$28.4K</div>
+            </div>
+          </div>
+
+          <div class="dash-feed">
+            <div class="dash-feed-title">// AI Activity Feed — Real-time</div>
+
+            <div class="dash-feed-item">
+              <div class="feed-status amber"></div>
+              <span class="feed-text">New lead captured — <strong>Mike T.</strong> requested panel upgrade quote via website</span>
+              <span class="feed-time">now</span>
+            </div>
+            <div class="dash-feed-item">
+              <div class="feed-status green"></div>
+              <span class="feed-text">AI sent quote follow-up SMS to <strong>Mike T.</strong> — response rate 74%</span>
+              <span class="feed-time">90s ago</span>
+            </div>
+            <div class="dash-feed-item">
+              <div class="feed-status blue"></div>
+              <span class="feed-text"><strong>Sarah J.</strong> confirmed appointment — Job #1094 scheduled for Thu 2pm</span>
+              <span class="feed-time">4m ago</span>
+            </div>
+            <div class="dash-feed-item">
+              <div class="feed-status green"></div>
+              <span class="feed-text">Invoice #2041 sent automatically to <strong>Carter Builds LLC</strong> — $3,200</span>
+              <span class="feed-time">18m ago</span>
+            </div>
+            <div class="dash-feed-item">
+              <div class="feed-status amber"></div>
+              <span class="feed-text">Review request sent to <strong>David R.</strong> — Google review link delivered via SMS</span>
+              <span class="feed-time">31m ago</span>
+            </div>
+            <div class="dash-feed-item">
+              <div class="feed-status green"></div>
+              <span class="feed-text">⭐⭐⭐⭐⭐ New 5-star Google review received from <strong>David R.</strong></span>
+              <span class="feed-time">44m ago</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- right panel -->
+        <div class="dash-panel">
+          <div class="dash-panel-title">// AI Assistant</div>
+
+          <div class="dash-ai-bubble">
+            <div class="dash-ai-label">AI · Insight</div>
+            You have 3 leads that haven't responded in 48hrs. Recommend sending a "still interested?" sequence.
+          </div>
+
+          <div class="dash-ai-bubble" style="background:rgba(27,58,92,0.2);border-color:rgba(27,58,92,0.4);">
+            <div class="dash-ai-label" style="color:#4A8FDB;">AI · Forecast</div>
+            Based on last year's data, HVAC season starts in 6 weeks. Schedule a promo campaign now?
+          </div>
+
+          <div style="margin-top:20px;">
+            <div class="dash-feed-title">// Quick Actions</div>
+            <button class="dash-action-btn">→ Send follow-up batch</button>
+            <button class="dash-action-btn">→ Generate weekly report</button>
+            <button class="dash-action-btn">→ Review pending invoices</button>
+            <button class="dash-action-btn">→ Check AI automations</button>
+          </div>
+        </div>
+      </div><!-- /dash-body -->
+    </div><!-- /dashboard-mock -->
+  </div>
+</section>
+
+<!-- ============ RESULTS ============ -->
+<section id="results">
+  <div class="results-inner">
+    <p class="section-label mono" style="color:var(--orange);">// Real Results</p>
+    <h2>Trades That<br/>Run Smarter</h2>
+    <div class="results-grid">
+
+      <div class="result-card">
+        <div class="result-stat"><span data-count="11" data-suffix=" jobs">0 jobs</span><br/><span style="font-size:18px;color:rgba(247,245,240,0.4)">per week</span></div>
+        <p class="result-quote">Went from 3 to 11 booked jobs a week after our AI lead system went live. We stopped losing people in the cracks.</p>
+        <p class="result-author mono">— J. Harmon, Roofer · Dallas, TX</p>
+      </div>
+
+      <div class="result-card">
+        <div class="result-stat"><span data-count="3" data-suffix="hrs">0hrs</span><br/><span style="font-size:18px;color:rgba(247,245,240,0.4)">back every night</span></div>
+        <p class="result-quote">Stopped spending 3 hours a night on invoices. The system handles it all. I actually eat dinner with my family now.</p>
+        <p class="result-author mono">— T. Grabowski, Plumber · Columbus, OH</p>
+      </div>
+
+      <div class="result-card">
+        <div class="result-stat"><span data-count="40" data-suffix=" new">0 new</span><br/><span style="font-size:18px;color:rgba(247,245,240,0.4)">customers / month 1</span></div>
+        <p class="result-quote">Our new website brought in 40 new customers in the first month. It used to take us a year to get that kind of growth.</p>
+        <p class="result-author mono">— R. Casillo, Landscaper · Tampa, FL</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ CUSTOM SOLUTIONS ============ -->
+<section id="custom">
+  <div class="custom-inner">
+    <p class="section-label mono" style="text-align:center;">// Bespoke Builds</p>
+    <h2>Don't Fit<br/>a Template?<br/><span style="color:var(--amber);">Good.</span></h2>
+    <p>We build fully custom AI systems around your exact workflow — your team, your tools, your trade. No cookie-cutter packages. No bloated software you'll never use. Just the system your business actually needs.</p>
+    <a href="#closing" class="btn-primary">Tell Us What You Need →</a>
+  </div>
+</section>
+
+<!-- ============ PRICING ============ -->
+<section id="pricing">
+  <div class="pricing-inner">
+    <p class="section-label mono">// Investment</p>
+    <h2 class="section-title">Simple.<br/>Powerful. Priced<br/>for the Trades.</h2>
+
+    <div class="pricing-grid">
+
+      <div class="price-card">
+        <div class="price-tier">Starter</div>
+        <div class="price-amount">$1,497</div>
+        <div class="price-period mono">one-time setup · + $247/month</div>
+        <ul class="price-features">
+          <li>Custom trade website</li>
+          <li>Online booking integration</li>
+          <li>Basic lead capture automation</li>
+          <li>Google Business Profile sync</li>
+          <li>Monthly performance report</li>
+          <li>Email support</li>
+        </ul>
+        <a href="#closing" class="btn-ghost" style="display:block;text-align:center;">Get Started</a>
+      </div>
+
+      <div class="price-card featured">
+        <div class="price-badge mono">Most Popular</div>
+        <div class="price-tier">Pro</div>
+        <div class="price-amount">$2,197</div>
+        <div class="price-period mono">one-time setup · + $497/month</div>
+        <ul class="price-features">
+          <li>Full AI Business Management System</li>
+          <li>Automated scheduling & dispatching</li>
+          <li>Invoice & estimate automation</li>
+          <li>AI-powered CRM for trades</li>
+          <li>Review generation on autopilot</li>
+          <li>QuickBooks / Jobber integration</li>
+          <li>Priority support & system updates</li>
+        </ul>
+        <a href="#closing" class="btn-primary" style="display:block;text-align:center;">Get Started →</a>
+      </div>
+
+      <div class="price-card">
+        <div class="price-tier">Custom</div>
+        <div class="price-amount" style="font-size:44px;padding-top:10px;">Let's Talk</div>
+        <div class="price-period mono">enterprise · multi-location</div>
+        <ul class="price-features">
+          <li>Everything in Pro</li>
+          <li>Multi-location deployment</li>
+          <li>Custom API integrations</li>
+          <li>Bespoke workflow automation</li>
+          <li>Dedicated account manager</li>
+          <li>Staff training & onboarding</li>
+          <li>SLA & uptime guarantee</li>
+        </ul>
+        <a href="#closing" class="btn-ghost" style="display:block;text-align:center;">Contact Us</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section id="faq">
+  <div class="faq-inner">
+    <p class="section-label mono" style="color:var(--orange);">// Common Questions</p>
+    <h2>No Fluff<br/>Answers.</h2>
+
+    <div class="faq-item">
+      <button class="faq-q">
+        Do I need to be tech-savvy to use this?
+        <span class="faq-arrow">+</span>
+      </button>
+      <div class="faq-a">
+        <div class="faq-a-inner">Not at all. We build the system, we train it, and we manage it. Your job is to do your trade — the system handles the rest. If something needs fixing, you call us. We handle it. Most of our clients have never used software beyond texting and email.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q">
+        How long does setup take?
+        <span class="faq-arrow">+</span>
+      </button>
+      <div class="faq-a">
+        <div class="faq-a-inner">Most systems are live within 7–14 business days. Websites are typically live in 5–7 days. Custom enterprise deployments can take 3–6 weeks depending on complexity. We work fast without cutting corners — and you'll see progress at every step.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q">
+        Will this work with my existing software?
+        <span class="faq-arrow">+</span>
+      </button>
+      <div class="faq-a">
+        <div class="faq-a-inner">In most cases, yes. We integrate with QuickBooks, Jobber, ServiceTitan, Housecall Pro, Google Business Profile, and hundreds of other tools via API. During your free AI Audit, we'll map your current stack and identify exactly what can connect — and what to replace.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q">
+        What trades do you specialize in?
+        <span class="faq-arrow">+</span>
+      </button>
+      <div class="faq-a">
+        <div class="faq-a-inner">We specialize in all field service trades: electrical, plumbing, HVAC, roofing, landscaping, general contracting, painting, pest control, windows & doors, and low-voltage. If you run a field service business, we've built a system for it — or we'll build one from scratch.</div>
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <button class="faq-q">
+        What happens if something breaks or needs updating?
+        <span class="faq-arrow">+</span>
+      </button>
+      <div class="faq-a">
+        <div class="faq-a-inner">We monitor all systems proactively. Pro and Custom clients get priority support with guaranteed response within 4 hours. We push updates automatically — you never have to chase us down. Think of us as the IT department you never had to hire.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============ CLOSING CTA ============ -->
+<section id="closing">
+  <div class="closing-inner">
+    <p class="section-label mono" style="text-align:center;margin-bottom:24px;">// Don't Wait</p>
+    <h2>Your Competitors<br/>Are Already<br/><span>Automating.</span></h2>
+    <p>Every week without a system is leads lost, hours wasted, and jobs going to someone who moves faster. Get your free AI Audit — we'll show you exactly where your business is bleeding time and money.</p>
+
+    <form class="closing-form" novalidate="">
+      <input type="email" class="closing-input" placeholder="Your business email"/>
+      <button type="submit" class="closing-submit">Get Your Audit →</button>
+    </form>
+    <p style="font-family:&#39;IBM Plex Mono&#39;,monospace;font-size:10px;color:rgba(247,245,240,0.25);margin-top:16px;letter-spacing:0.08em;">NO COST. NO OBLIGATION. RESULTS IN 24 HOURS.</p>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a class="nav-logo" href="#" style="font-size:24px;">Crewbridge<span>AI</span></a>
+      <p>AI-powered business systems for the trades industry. Built for electricians, plumbers, roofers, landscapers, HVAC, and contractors who are serious about growth.</p>
+    </div>
+
+    <div>
+      <div class="footer-col-title">Services</div>
+      <ul class="footer-links">
+        <li><a href="#services">AI Business Systems</a></li>
+        <li><a href="#services">Trade Websites</a></li>
+        <li><a href="#services">AI Deployment</a></li>
+        <li><a href="#services">Custom Solutions</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="footer-col-title">Trade Verticals</div>
+      <ul class="footer-links">
+        <li><a href="#trades">Electrical</a></li>
+        <li><a href="#trades">Plumbing</a></li>
+        <li><a href="#trades">Roofing</a></li>
+        <li><a href="#trades">Landscaping</a></li>
+        <li><a href="#trades">HVAC</a></li>
+        <li><a href="#trades">Contracting</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="footer-col-title">Company</div>
+      <ul class="footer-links">
+        <li><a href="#how">How It Works</a></li>
+        <li><a href="#results">Case Studies</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="#closing">Get Free Audit</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#1a727f7676755a79687f6d7868737e7d7f7b7334797577">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 CrewbridgeAI. All rights reserved. Built for the people who build everything else.</span>
+    <div class="footer-socials">
+      <a href="#" class="social-link" aria-label="LinkedIn">in</a>
+      <a href="#" class="social-link" aria-label="Facebook">f</a>
+      <a href="#" class="social-link" aria-label="Instagram">ig</a>
+      <a href="#" class="social-link" aria-label="YouTube">▶</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ WHATSAPP FLOATING BUTTON ============ -->
+<a href="https://wa.me/18484590440?text=Hi!%20I%27m%20interested%20in%20your%20AI%20Business%20Management%20services." target="_blank" rel="noopener" class="whatsapp-fab" aria-label="Chat with us on WhatsApp">
+  <span class="whatsapp-tooltip">Chat with us</span>
+  <svg viewbox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+  </svg>
+</a>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+/* ============================================
+   AI TRADES AGENCY — INTERACTIONS & ANIMATIONS
+   ============================================ */
+
+// ---- NAV SCROLL ----
+const nav = document.querySelector('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// ---- MOBILE MENU ----
+const burger = document.querySelector('.nav-burger');
+const mobileMenu = document.querySelector('.mobile-menu');
+burger.addEventListener('click', () => {
+  mobileMenu.classList.toggle('open');
+  const spans = burger.querySelectorAll('span');
+  const isOpen = mobileMenu.classList.contains('open');
+  spans[0].style.transform = isOpen ? 'translateY(7px) rotate(45deg)' : '';
+  spans[1].style.opacity = isOpen ? '0' : '1';
+  spans[2].style.transform = isOpen ? 'translateY(-7px) rotate(-45deg)' : '';
+});
+document.querySelectorAll('.mobile-menu a').forEach(a => {
+  a.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    burger.querySelectorAll('span').forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+  });
+});
+
+// ---- HERO WORD SLAM ----
+function animateHero() {
+  const label = document.querySelector('.hero-label');
+  const sub = document.querySelector('.hero-sub');
+  const ctas = document.querySelector('.hero-ctas');
+  const stats = document.querySelector('.hero-stats');
+
+  // label
+  setTimeout(() => label.classList.add('visible'), 100);
+
+  // lines slam in
+  const lineInners = document.querySelectorAll('.hero-headline .hl-inner');
+  lineInners.forEach((el, i) => {
+    setTimeout(() => {
+      el.style.transform = 'translateY(0)';
+      el.style.opacity = '1';
+    }, 200 + i * 100);
+  });
+
+  const lastDelay = 200 + lineInners.length * 100;
+  setTimeout(() => sub.classList.add('visible'), lastDelay + 50);
+  setTimeout(() => ctas.classList.add('visible'), lastDelay + 150);
+  setTimeout(() => stats.classList.add('visible'), lastDelay + 300);
+}
+
+window.addEventListener('load', animateHero);
+
+// ---- INTERSECTION OBSERVER (scroll reveals) ----
+const revealEls = document.querySelectorAll(
+  '.problem-item, .service-row, .how-step, .result-card, .dash-feed-item'
+);
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+revealEls.forEach(el => observer.observe(el));
+
+// ---- COUNTER ANIMATION ----
+function animateCounter(el, target, suffix = '', duration = 1800) {
+  const start = performance.now();
+  const isDecimal = target % 1 !== 0;
+
+  function update(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    // ease out expo
+    const eased = 1 - Math.pow(1 - progress, 4);
+    const val = eased * target;
+    el.textContent = (isDecimal ? val.toFixed(1) : Math.round(val)) + suffix;
+    if (progress < 1) requestAnimationFrame(update);
+  }
+  requestAnimationFrame(update);
+}
+
+const counters = document.querySelectorAll('[data-count]');
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const el = entry.target;
+      const target = parseFloat(el.dataset.count);
+      const suffix = el.dataset.suffix || '';
+      animateCounter(el, target, suffix);
+      counterObserver.unobserve(el);
+    }
+  });
+}, { threshold: 0.5 });
+
+counters.forEach(el => counterObserver.observe(el));
+
+// ---- FAQ ACCORDION ----
+document.querySelectorAll('.faq-item').forEach(item => {
+  const btn = item.querySelector('.faq-q');
+  const answer = item.querySelector('.faq-a');
+  btn.addEventListener('click', () => {
+    const isOpen = item.classList.contains('open');
+    // close all
+    document.querySelectorAll('.faq-item').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.faq-a').style.maxHeight = '0';
+    });
+    if (!isOpen) {
+      item.classList.add('open');
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+    }
+  });
+});
+
+// ---- DASHBOARD SIDEBAR NAV ----
+const dashViews = {
+  command: null, // populated from initial DOM
+  leads: `
+    <div class="dash-metrics">
+      <div class="dash-metric"><div class="dash-metric-label">Hot Leads</div><div class="dash-metric-val amber">14</div></div>
+      <div class="dash-metric"><div class="dash-metric-label">Awaiting Reply</div><div class="dash-metric-val">8</div></div>
+      <div class="dash-metric"><div class="dash-metric-label">Conversion Rate</div><div class="dash-metric-val green">38%</div></div>
+    </div>
+    <div class="dash-feed-title">// Active Leads — Sorted by AI Priority</div>
+    <div class="dash-feed-item visible"><div class="feed-status amber"></div><span class="feed-text"><strong>Mike T.</strong> · Panel upgrade · est. $4,200 · <span style="color:var(--amber)">HOT</span></span><span class="feed-time">90s</span></div>
+    <div class="dash-feed-item visible"><div class="feed-status amber"></div><span class="feed-text"><strong>Lena O.</strong> · Outdoor lighting · est. $1,800 · <span style="color:var(--amber)">HOT</span></span><span class="feed-time">12m</span></div>
+    <div class="dash-feed-item visible"><div class="feed-status blue"></div><span class="feed-text"><strong>Carter Builds LLC</strong> · Commercial rewire · est. $28K</span><span class="feed-time">1h</span></div>
+    <div class="dash-feed-item visible"><div class="feed-status green"></div><span class="feed-text"><strong>Sarah J.</strong> · Hot tub install · CONVERTED ✓</span><span class="feed-time">3h</span></div>
+    <div class="dash-feed-item visible"><div class="feed-status blue"></div><span class="feed-text"><strong>Devon P.</strong> · EV charger · est. $2,400</span><span class="feed-time">5h</span></div>
+  `,
+  scheduler: `
+    <div class="dash-metrics">
+      <div class="dash-metric"><div class="dash-metric-label">Today's Jobs</div><div class="dash-metric-val amber">7</div></div>
+      <div class="dash-metric"><div class="dash-metric-label">This Week</div><div class="dash-metric-val">23</div></div>
+      <div class="dash-metric"><div class="dash-metric-label">Crew Utilization</div><div class="dash-metric-val green">94%</div></div>
+    </div>
+    <div class="dash-feed-title">// Today's Schedule — Auto-dispatched by AI</div>
+    <div class="dash-feed-item visible"><div class="feed-status green"></div><span class="feed-text"><strong>8:00 AM</strong> · Crew A · 1247 Oak St · Service call</span><span class="feed-time">DONE</span></div>
+    <div class="dash-feed-item visible"><div class="feed-status amber"></div><span class="feed-text"><strong>10:30 AM</strong> · Crew B · Carter Plaza · Commercial install</span><span class="feed-time">IN PROGRESS</span></div>
+    <div class="dash-feed-item visible"><div class="feed-status blue"></div><span class="feed-text"><strong>1:00 PM</strong> · Crew A · 422 Maple Ave · Panel upgrade</span><span class="feed-time">UPCOMING</span></div>
+    <div class="dash-feed-item visible"><div class="feed-status blue"></div><span class="feed-text"><strong>2:30 PM</strong> · Crew C · 88 Industrial · Inspection</span><span class="feed-time">UPCOMING</span></div>
+    <div class="dash-feed-item visible"><div class="feed-status blue"></div><span class="feed-text"><strong>4:00 PM</strong> · Crew B · Sarah J. residence · Final walk</span><span class="feed-time">UPCOMING</span></div>
+  `,
+  invoices: `
+    <div class="dash-metrics">
+      <div class="dash-metric"><div class="dash-metric-label">Outstanding</div><div class="dash-metric-val amber">$12.4K</div></div>
+      <div class="dash-metric"><div class="dash-metric-label">Paid This Week</div><div class="dash-metric-val green">$28.4K</div></div>
+      <div class="dash-metric"><div class="dash-metric-label">Auto-sent Today</div><div class="dash-metric-val">9</div></div>
+    </div>
+    <div class="dash-feed-title">// Recent Invoices — Auto-generated</div>
+    <div class="dash-feed-item visible"><div class="feed-status green"></div><span class="feed-text">#2041 · <strong>Carter Builds LLC</strong> · $3,200 · PAID</span><span class="feed-time">18m</span></div>
+    <div class="dash-feed-item visible"><div class="feed-status amber"></div><span class="feed-text">#2040 · <strong>Sarah J.</strong> · $1,850 · SENT</span><span class="feed-time">4h</span></div>
+    <div class="dash-feed-item visible"><div class="feed-status green"></div><span class="feed-text">#2039 · <strong>Apex Mfg.</strong> · $7,400 · PAID</span><span class="feed-time">1d</span></div>
+    <div class="dash-feed-item visible"><div class="feed-status amber"></div><span class="feed-text">#2038 · <strong>Devon P.</strong> · $2,400 · OVERDUE 3d <span style="color:var(--orange)">→ AI reminder sent</span></span><span class="feed-time">3d</span></div>
+    <div class="dash-feed-item visible"><div class="feed-status green"></div><span class="feed-text">#2037 · <strong>Linda K.</strong> · $980 · PAID</span><span class="feed-time">5d</span></div>
+  `,
+  automations: `
+    <div class="dash-metrics">
+      <div class="dash-metric"><div class="dash-metric-label">Active Flows</div><div class="dash-metric-val amber">12</div></div>
+      <div class="dash-metric"><div class="dash-metric-label">Runs Today</div><div class="dash-metric-val">147</div></div>
+      <div class="dash-metric"><div class="dash-metric-label">Success Rate</div><div class="dash-metric-val green">99.2%</div></div>
+    </div>
+    <div class="dash-feed-title">// Running Automations</div>
+    <div class="dash-feed-item visible"><div class="feed-status green"></div><span class="feed-text"><strong>Lead → SMS Follow-up</strong> · 47 runs today · 74% reply rate</span><span class="feed-time">LIVE</span></div>
+    <div class="dash-feed-item visible"><div class="feed-status green"></div><span class="feed-text"><strong>Quote → 48hr Reminder</strong> · 12 runs today</span><span class="feed-time">LIVE</span></div>
+    <div class="dash-feed-item visible"><div class="feed-status green"></div><span class="feed-text"><strong>Job Complete → Review Request</strong> · 8 runs today</span><span class="feed-time">LIVE</span></div>
+    <div class="dash-feed-item visible"><div class="feed-status green"></div><span class="feed-text"><strong>Invoice Overdue → AI Nudge</strong> · 3 runs today</span><span class="feed-time">LIVE</span></div>
+    <div class="dash-feed-item visible"><div class="feed-status amber"></div><span class="feed-text"><strong>Seasonal Re-engage</strong> · paused · scheduled for Aug 1</span><span class="feed-time">QUEUED</span></div>
+  `,
+  reviews: `
+    <div class="dash-metrics">
+      <div class="dash-metric"><div class="dash-metric-label">Avg Rating</div><div class="dash-metric-val amber">4.9★</div></div>
+      <div class="dash-metric"><div class="dash-metric-label">Total Reviews</div><div class="dash-metric-val">347</div></div>
+      <div class="dash-metric"><div class="dash-metric-label">This Month</div><div class="dash-metric-val green">+22</div></div>
+    </div>
+    <div class="dash-feed-title">// Recent Reviews — Auto-requested by AI</div>
+    <div class="dash-feed-item visible"><div class="feed-status green"></div><span class="feed-text">⭐⭐⭐⭐⭐ <strong>David R.</strong> · "Fast, clean work. Will hire again."</span><span class="feed-time">44m</span></div>
+    <div class="dash-feed-item visible"><div class="feed-status green"></div><span class="feed-text">⭐⭐⭐⭐⭐ <strong>Linda K.</strong> · "Showed up on time, fair price."</span><span class="feed-time">2h</span></div>
+    <div class="dash-feed-item visible"><div class="feed-status green"></div><span class="feed-text">⭐⭐⭐⭐⭐ <strong>Apex Mfg.</strong> · "Best electrical contractor we've used."</span><span class="feed-time">1d</span></div>
+    <div class="dash-feed-item visible"><div class="feed-status amber"></div><span class="feed-text">⭐⭐⭐⭐ <strong>Mark V.</strong> · "Good work, slight delay."</span><span class="feed-time">2d</span></div>
+    <div class="dash-feed-item visible"><div class="feed-status green"></div><span class="feed-text">⭐⭐⭐⭐⭐ <strong>Sarah J.</strong> · "Professional from start to finish."</span><span class="feed-time">3d</span></div>
+  `,
+  analytics: `
+    <div class="dash-metrics">
+      <div class="dash-metric"><div class="dash-metric-label">MTD Revenue</div><div class="dash-metric-val amber">$112K</div></div>
+      <div class="dash-metric"><div class="dash-metric-label">vs Last Month</div><div class="dash-metric-val green">+34%</div></div>
+      <div class="dash-metric"><div class="dash-metric-label">Avg Job Value</div><div class="dash-metric-val">$2,840</div></div>
+    </div>
+    <div class="dash-feed-title">// Performance — Last 30 Days</div>
+    <div class="dash-feed-item visible"><div class="feed-status green"></div><span class="feed-text">Lead → Job conversion <strong>38%</strong> · industry avg 19%</span><span class="feed-time">▲</span></div>
+    <div class="dash-feed-item visible"><div class="feed-status green"></div><span class="feed-text">Avg response time <strong>90 seconds</strong> · 24× faster than competitors</span><span class="feed-time">▲</span></div>
+    <div class="dash-feed-item visible"><div class="feed-status green"></div><span class="feed-text">Repeat customer rate <strong>62%</strong></span><span class="feed-time">▲</span></div>
+    <div class="dash-feed-item visible"><div class="feed-status amber"></div><span class="feed-text">Top lead source · <strong>Google Local · 47%</strong></span><span class="feed-time">—</span></div>
+    <div class="dash-feed-item visible"><div class="feed-status blue"></div><span class="feed-text">Hours saved this month · <strong>52 hrs</strong> via automation</span><span class="feed-time">▲</span></div>
+  `,
+  settings: `
+    <div class="dash-metrics">
+      <div class="dash-metric"><div class="dash-metric-label">Plan</div><div class="dash-metric-val amber" style="font-size:22px;padding-top:8px;">Pro</div></div>
+      <div class="dash-metric"><div class="dash-metric-label">Team Seats</div><div class="dash-metric-val">8 / 10</div></div>
+      <div class="dash-metric"><div class="dash-metric-label">Integrations</div><div class="dash-metric-val green">6</div></div>
+    </div>
+    <div class="dash-feed-title">// Connected Services</div>
+    <div class="dash-feed-item visible"><div class="feed-status green"></div><span class="feed-text"><strong>QuickBooks</strong> · synced · last 4 min ago</span><span class="feed-time">OK</span></div>
+    <div class="dash-feed-item visible"><div class="feed-status green"></div><span class="feed-text"><strong>Google Business Profile</strong> · synced</span><span class="feed-time">OK</span></div>
+    <div class="dash-feed-item visible"><div class="feed-status green"></div><span class="feed-text"><strong>Twilio SMS</strong> · 1,247 / 5,000 msgs this month</span><span class="feed-time">OK</span></div>
+    <div class="dash-feed-item visible"><div class="feed-status green"></div><span class="feed-text"><strong>Stripe</strong> · payments enabled</span><span class="feed-time">OK</span></div>
+    <div class="dash-feed-item visible"><div class="feed-status amber"></div><span class="feed-text"><strong>Jobber</strong> · re-auth needed</span><span class="feed-time">!</span></div>
+  `,
+};
+
+const dashMain = document.getElementById('dashMain');
+if (dashMain) {
+  // capture original Command Center HTML
+  dashViews.command = dashMain.innerHTML;
+
+  document.querySelectorAll('.dash-nav-item').forEach(item => {
+    item.addEventListener('click', () => {
+      document.querySelectorAll('.dash-nav-item').forEach(i => i.classList.remove('active'));
+      item.classList.add('active');
+      const view = item.dataset.view;
+      if (dashViews[view]) {
+        dashMain.innerHTML = dashViews[view];
+        // brief fade-in
+        dashMain.style.opacity = '0';
+        requestAnimationFrame(() => {
+          dashMain.style.transition = 'opacity 0.3s';
+          dashMain.style.opacity = '1';
+        });
+      }
+    });
+  });
+}
+
+// ---- DASHBOARD SIMULATION (only runs on Command Center view) ----
+let feedTimeout = null;
+let feedIndex = 0;
+
+function showNextFeed() {
+  // requery each time — view may have been swapped
+  const activeNav = document.querySelector('.dash-nav-item.active');
+  if (!activeNav || activeNav.dataset.view !== 'command') return;
+
+  const feedItems = document.querySelectorAll('#dashMain .dash-feed-item');
+  if (!feedItems.length) return;
+
+  if (feedIndex < feedItems.length) {
+    feedItems[feedIndex].classList.add('visible');
+    feedIndex++;
+    feedTimeout = setTimeout(showNextFeed, 900);
+  } else {
+    feedTimeout = setTimeout(() => {
+      const items = document.querySelectorAll('#dashMain .dash-feed-item');
+      items.forEach(el => el.classList.remove('visible'));
+      feedIndex = 0;
+      feedTimeout = setTimeout(showNextFeed, 600);
+    }, 4000);
+  }
+}
+
+function startFeed() {
+  clearTimeout(feedTimeout);
+  feedIndex = 0;
+  // reset visibility on Command view items
+  const items = document.querySelectorAll('#dashMain .dash-feed-item');
+  items.forEach(el => el.classList.remove('visible'));
+  feedTimeout = setTimeout(showNextFeed, 400);
+}
+
+// Restart feed whenever Command Center is selected
+document.querySelectorAll('.dash-nav-item').forEach(item => {
+  item.addEventListener('click', () => {
+    if (item.dataset.view === 'command') {
+      // wait one tick for DOM swap
+      setTimeout(startFeed, 50);
+    } else {
+      clearTimeout(feedTimeout);
+    }
+  });
+});
+
+const dashObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      startFeed();
+      dashObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+
+const dashEl = document.querySelector('#dashMain');
+if (dashEl) dashObserver.observe(dashEl);
+
+// ---- DASHBOARD METRIC LIVE UPDATE ----
+function randomFlicker() {
+  const leads = document.querySelector('.dash-leads');
+  if (!leads) return;
+  const base = 47;
+  const wobble = Math.floor(Math.random() * 3);
+  leads.textContent = base + wobble;
+  setTimeout(randomFlicker, 3000 + Math.random() * 2000);
+}
+setTimeout(randomFlicker, 2000);
+
+// ---- AMBER GLOW ON HOVER (CTA) ----
+document.querySelectorAll('.btn-primary, .closing-submit').forEach(btn => {
+  btn.addEventListener('mouseenter', () => {
+    btn.style.boxShadow = '0 0 40px rgba(232,84,10,0.6), 0 0 80px rgba(232,84,10,0.2)';
+  });
+  btn.addEventListener('mouseleave', () => {
+    btn.style.boxShadow = '';
+  });
+});
+
+// ---- EMAIL FORM ----
+const closingForm = document.querySelector('.closing-form');
+if (closingForm) {
+  closingForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const input = closingForm.querySelector('.closing-input');
+    const btn = closingForm.querySelector('.closing-submit');
+    if (!input.value.includes('@')) {
+      input.style.borderColor = 'var(--orange)';
+      input.placeholder = 'Enter a valid email';
+      return;
+    }
+    btn.textContent = 'Request Sent ✓';
+    btn.style.background = '#2a7a4a';
+    input.value = '';
+    input.placeholder = "We'll be in touch within 24hrs";
+    setTimeout(() => {
+      btn.textContent = 'Get Your Audit →';
+      btn.style.background = '';
+    }, 4000);
+  });
+}
+
+// ---- SMOOTH ANCHOR SCROLL ----
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      const top = target.getBoundingClientRect().top + window.scrollY - 80;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  });
+});
+
+// ---- PARALLAX HERO GRID ----
+window.addEventListener('scroll', () => {
+  const grid = document.querySelector('.hero-grid-bg');
+  if (grid) {
+    grid.style.transform = `translateY(${window.scrollY * 0.15}px)`;
+  }
+});
+
+</script>
+</body>
+</html>
